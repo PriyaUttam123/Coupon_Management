@@ -1,36 +1,41 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import CreateCoupon from './pages/CreateCoupon';
+import TestCoupon from './pages/TestCoupon';
+import { PlusCircle, Search } from 'lucide-react';
+
+function Dashboard() {
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">Coupon Management Dashboard</h1>
+      <div className="flex gap-4">
+        <Link
+          to="/create"
+          className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-all font-medium text-lg"
+        >
+          <PlusCircle className="w-5 h-5" />
+          Create New Coupon
+        </Link>
+        <Link
+          to="/test"
+          className="flex items-center gap-2 px-6 py-3 bg-white text-gray-800 border border-gray-200 rounded-lg shadow-md hover:bg-gray-50 transition-all font-medium text-lg"
+        >
+          <Search className="w-5 h-5" />
+          Test Coupons
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 text-gray-800">
-      <div className="flex space-x-4 mb-4">
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="h-16 w-16" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="h-16 w-16 animate-spin" alt="React logo" />
-        </a>
-      </div>
-      <h1 className="text-4xl font-bold mb-4">Vite + React + Tailwind CSS v4</h1>
-      <div className="p-4 bg-white shadow-lg rounded-lg">
-        <button
-          onClick={() => setCount((count) => count + 1)}
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
-        >
-          count is {count}
-        </button>
-        <p className="mt-2 text-sm text-gray-600">
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="mt-4 text-gray-500">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/create" element={<CreateCoupon />} />
+        <Route path="/test" element={<TestCoupon />} />
+      </Routes>
+    </Router>
   )
 }
 
